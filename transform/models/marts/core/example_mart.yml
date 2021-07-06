@@ -3,7 +3,6 @@ version: 2
 models:
   - name: dim_customers
     description: The pre-prod version of the customers table
-
     columns:
       - name: id
         description: This is a unique identifier for a customer
@@ -21,56 +20,59 @@ models:
         tests:
           - accepted_values:
               values: ["M", "F"]
-
-  # - name: fct_orders
-  #   description: This table has basic information about orders, as well as some derived facts based on payments
-
-  #   columns:
-  #     - name: order_id
-  #       tests:
-  #         - unique
-  #         - not_null
-  #       description: This is a unique identifier for an order
-
-  #     - name: customer_id
-  #       description: Foreign key to the customers table
-  #       tests:
-  #         - not_null
-  #         - relationships:
-  #             to: ref('dim_customers')
-  #             field: customer_id
-
-  #     - name: order_date
-  #       description: Date (UTC) that the order was placed
-
-  #     - name: status
-  #       description: '{{ doc("orders_status") }}'
-  #       tests:
-  #         - accepted_values:
-  #             values:
-  #               ["placed", "shipped", "completed", "return_pending", "returned"]
-
-  #     - name: amount
-  #       description: Total amount (AUD) of the order
-  #       tests:
-  #         - not_null
-
-  #     - name: credit_card_amount
-  #       description: Amount of the order (AUD) paid for by credit card
-  #       tests:
-  #         - not_null
-
-  #     - name: coupon_amount
-  #       description: Amount of the order (AUD) paid for by coupon
-  #       tests:
-  #         - not_null
-
-  #     - name: bank_transfer_amount
-  #       description: Amount of the order (AUD) paid for by bank transfer
-  #       tests:
-  #         - not_null
-
-  #     - name: gift_card_amount
-  #       description: Amount of the order (AUD) paid for by gift card
-  #       tests:
-  #         - not_null
+  - name: dim_locations
+    description: The pre-prod version of the locations (shops) table
+    columns:
+      - name: id
+        description: The unique idenetifier for a customer
+        tests:
+          - unique
+          - not_null
+      - name: city
+        description: City name
+      - name: state
+        description: State abbreviation code (e.g. "TX")
+      - name: zip
+        description: Zip-5 code, zero-padded
+  - name: fct_orders_last_three_years
+    description: The pre-prod version of the orders table (trailing 3 years)
+    tests:
+      - unique:
+          column_name: "concat(CAST(id AS VARCHAR), CAST(order_year AS VARCHAR))"
+    columns:
+      - name: id
+        description: The id of the order. Only unique within a given year
+        tests:
+          - not_null
+      - name: order_year
+        description: The year of the order. Forms a composite key when used with id
+        tests:
+          - not_null
+      - name: order_date
+        description: The calendar date of the order
+      - name: amount
+        description: Payment in USD
+      - name: customer_id
+        description: Customer ID (TODO set foreign key)
+      - name: location_id
+        description: Location ID (TODO set foreign key)
+  - name: fct_location_orders
+    description: Orders aggregated by Location
+    columns:
+      - name: location_id
+        description: The unique idenetifier for a location
+        tests:
+          - unique
+          - not_null
+      - name: city
+        description: City name
+      - name: state
+        description: State abbreviation code (e.g. "TX")
+      - name: zip
+        description: Zip-5 code, zero-padded
+      - name: total_amount
+        description: Total amount for all orders in the location
+      - name: avg_amount
+        description: Average amount for all orders in the location
+      - name: volume
+        description: Count of orders

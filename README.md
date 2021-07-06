@@ -2,6 +2,8 @@
 
 Sample ELT, data pipeline process. Data is fake. Pipeline process is real(ish). This is largely a demo of [DBT](https://docs.getdbt.com/tutorial/setting-up), and as such uses a Posgres instance as the data warehouse to minimize cost. Snowflake or Redshift would be more robust (and expensive), would for the most part only require profile configuration changes.
 
+This assumes that you have (1) [dbt cli installed locally](https://docs.getdbt.com/dbt-cli/installation) (2) a data warehouse setup. Consider [local postgres](https://www.postgresql.org/download/) or [Google BigQuery](https://docs.getdbt.com/tutorial/setting-up#create-a-bigquery-project)
+
 ---
 
 ## Data
@@ -36,4 +38,27 @@ dbt init transform
 cd transform
 dbt run
 dbt test
+dbt docs generate
+dbt docs serve
 ```
+
+### Directory Structure
+
+- [How we structure our dbt projects](https://discourse.getdbt.com/t/how-we-structure-our-dbt-projects/355)
+- [Example repo](https://github.com/dbt-labs/jaffle_shop-dev)
+
+- models: Contains the table creations
+  - staging: Map 1-to-1 with raw data sources; Contain only data conversions, cleaning, and unions
+  - marts: Tables that will actually be used for analysis or published to production
+
+### Tests
+
+[Coming soon](https://docs.getdbt.com/docs/building-a-dbt-project/tests)
+
+### Variables
+
+[Coming soon](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/using-variables)
+
+### Seeding lookup tables
+
+[Coming soon](https://docs.getdbt.com/docs/building-a-dbt-project/seeds)
