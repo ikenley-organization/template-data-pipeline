@@ -62,3 +62,7 @@ dbt docs serve
 ### Seeding lookup tables
 
 [Coming soon](https://docs.getdbt.com/docs/building-a-dbt-project/seeds)
+
+### Running specific models
+
+[Coming soon](https://docs.getdbt.com/reference/node-selection/syntax)
