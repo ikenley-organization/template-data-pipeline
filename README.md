@@ -1,6 +1,6 @@
 # template-data-pipeline
 
-Sample ELT, data pipeline process. Data is fake. Pipeline process is real(ish). This is largely a demo of DBT, and as such uses a Posgres instance as the data warehouse to minimize cost. Snowflake or Redshift would be more robust (and expensive), would for the most part only require profile configuration changes.
+Sample ELT, data pipeline process. Data is fake. Pipeline process is real(ish). This is largely a demo of [DBT](https://docs.getdbt.com/tutorial/setting-up), and as such uses a Posgres instance as the data warehouse to minimize cost. Snowflake or Redshift would be more robust (and expensive), would for the most part only require profile configuration changes.
 
 ---
 
@@ -26,3 +26,14 @@ Load raw data into data warehouse. This script loads S3 flat files into Postgres
 ---
 
 ## Transform
+
+### Creating a dbt project subdirectory
+
+https://docs.getdbt.com/tutorial/create-a-project-dbt-cli
+
+```
+dbt init transform
+cd transform
+dbt run
+dbt test
+```
