@@ -1,6 +1,6 @@
 # template-data-pipeline
 
-Sample ELT, data pipeline process. Data is fake. Pipeline process is real(ish). This is largely a demo of [DBT](https://docs.getdbt.com/tutorial/setting-up), and as such uses a Posgres instance as the data warehouse to minimize cost. Snowflake or Redshift would be more robust (and expensive), would for the most part only require profile configuration changes.
+Sample [ELT](https://en.wikipedia.org/wiki/Extract,_load,_transform), data pipeline process. Data is fake. Pipeline process is real(ish). This is largely a demo of [DBT](https://docs.getdbt.com/tutorial/setting-up), and as such uses a Posgres instance as the data warehouse to minimize cost. Snowflake or Redshift would be more robust (and expensive), would for the most part only require profile configuration changes.
 
 This assumes that you have (1) [dbt cli installed locally](https://docs.getdbt.com/dbt-cli/installation) (2) a data warehouse setup. Consider [local postgres](https://www.postgresql.org/download/) or [Google BigQuery](https://docs.getdbt.com/tutorial/setting-up#create-a-bigquery-project)
 
