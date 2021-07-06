@@ -14,7 +14,7 @@ Sample data to upload to an S3 bucket. In the real world this data would arrive 
 # Upload all files in ./data to S3
 aws s3 sync ./data s3://924586450630-data-lake/ --profile antigone-dev-tf --region us-east-1
 
-# Check CVS schema
+# Check CSV schema
 cd data/template-data-pipeline/raw
 head customers.csv
 ```
